@@ -11,7 +11,8 @@ const EditBook = () => {
     title: '',
     publisher: '',
     pages: '',
-    year: ''
+    year: '',
+    srcPhoto: ''
   });
 
   useEffect(() => {
@@ -32,7 +33,8 @@ const EditBook = () => {
       title: book.title,
       publisher: book.publisher,
       pages: book.pages,
-      year: book.year
+      year: book.year,
+      srcPhoto: book.srcPhoto || ''
     });
   };
 
@@ -50,7 +52,8 @@ const EditBook = () => {
       title: bookDetails.title,
       publisher: bookDetails.publisher,
       pages: Number(bookDetails.pages),
-      year: Number(bookDetails.year)
+      year: Number(bookDetails.year),
+      srcPhoto: bookDetails.srcPhoto
     };
 
     try {
@@ -72,7 +75,16 @@ const EditBook = () => {
             className={`${styles.bookItem} ${selectedBookId === book.id ? styles.selected : ''}`}
             onClick={() => handleSelectBook(book.id)}
           >
-            {book.title}
+            <div className={styles.card}>
+              <img src={book.srcPhoto} alt={book.title} className={styles.cardImage} />
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{book.title}</h3>
+                <p className={styles.cardText}>Author(s): {book.authors.join(', ')}</p>
+                <p className={styles.cardText}>Publisher: {book.publisher}</p>
+                <p className={styles.cardText}>Pages: {book.pages}</p>
+                <p className={styles.cardText}>Year: {book.year}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -134,5 +146,6 @@ const EditBook = () => {
     </div>
   );
 };
+
 
 export default EditBook;

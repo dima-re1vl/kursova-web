@@ -24,7 +24,7 @@ const FindBooks = () => {
     e.preventDefault();
 
     const booksRef = collection(db, 'books');
-    let q = booksRef;
+    let q = query(booksRef);
 
     if (searchParams.authors !== '') {
       const authorsArray = searchParams.authors.split(',').map(author => author.trim());
@@ -81,6 +81,7 @@ const FindBooks = () => {
       <div className={styles.booksList}>
         {books.map(book => (
           <div key={book.id} className={styles.bookItem}>
+            {book.srcPhoto && <img src={book.srcPhoto} alt={book.title} className={styles.bookImage} />}
             <h3>{book.title}</h3>
             <p>Authors: {book.authors.join(', ')}</p>
             <p>Publisher: {book.publisher}</p>

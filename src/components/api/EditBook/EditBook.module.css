@@ -1,51 +1,42 @@
 .container {
-    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .booksList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .bookItem {
+    cursor: pointer;
+}
+
+.bookItem.selected {
+    border: 2px solid blue;
+}
+
+.card {
     border: 1px solid #ccc;
-    padding: 0.5rem;
-    cursor: pointer;
-    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.bookItem:hover {
-    background-color: #f0f0f0;
+.cardImage {
+    width: 100%;
+    height: auto;
 }
 
-.selected {
-    background-color: #d0e6f7;
+.cardContent {
+    padding: 15px;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
+.cardTitle {
+    margin: 0 0 10px;
 }
 
-.form label {
-    margin-bottom: 1rem;
-}
-
-.form input {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.form button {
-    padding: 0.5rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.form button:hover {
-    background-color: #45a049;
+.cardText {
+    margin: 5px 0;
 }
