@@ -40,3 +40,46 @@
 .cardText {
     margin: 5px 0;
 }
+
+
+
+
+.form button:hover {
+    background-color: #45a049;
+}
+
+.bookItem {
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: white;
+}
+
+.bookItem:hover {
+    background-color: #f0f0f0;
+}
+
+.selected {
+    background-color: #d0e6f7;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form label {
+    margin-bottom: 1rem;
+}
+
+.form input {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.form button {
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
