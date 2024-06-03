@@ -1,24 +1,28 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import AddBook from './components/pages/AddBook/AddBook';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Header from './components/Header/Header';
+import FindBook from './components/pages/FindBook/FindBook';
 import EditBook from './components/pages/EditBook/EditBook';
-import FindBooks from './components/pages/FindBook/FindBook';
-import DeleteBook from './components/pages/DeleteBook/DeleteBook';
-import Home from './components/Home/Home';
-import './App.css';
+import AddBook from './components/pages/AddBook/AddBook';
+import DeleteBook from './components/pages/DeleteBook/DeleteBook'
+import Home from './components/Home/Home'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/add" element={<AddBook />} />
-        <Route path="/edit" element={<EditBook />} />
-        <Route path="/find" element={<FindBooks />} />
-        <Route path="/delete" element={<DeleteBook />} />
-      </Routes>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/find" element={<FindBook />} />
+          <Route path="/edit" element={<EditBook />} />
+          <Route path="/delete" element={<DeleteBook />} />
+          <Route path="/add" element={<AddBook />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
-}
+};
 
 export default App;

@@ -15,7 +15,7 @@ const AddBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!authors || !title || !publisher || !pages || !year) {
+    if (!authors || !title || !publisher || !pages || !year || !srcPhoto) {
       setFormIncomplete(true);
       return;
     }
@@ -101,6 +101,7 @@ const AddBook = () => {
             type="text"
             value={srcPhoto}
             onChange={(e) => setSrcPhoto(e.target.value)}
+            className={formIncomplete && !srcPhoto ? styles.incomplete : ''}
           />
         </label>
         {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}
