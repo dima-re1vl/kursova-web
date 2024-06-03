@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AddBook from './components/api/AddBook/AddBook';
-import EditBook from './components/api/EditBook/EditBook';
-import FindBooks from './components/api/FindBook/FindBook';
-import DeleteBook from './components/api/DeleteBook/DeleteBook';
+import AddBook from './components/pages/AddBook/AddBook';
+import EditBook from './components/pages/EditBook/EditBook';
+import FindBooks from './components/pages/FindBook/FindBook';
+import DeleteBook from './components/pages/DeleteBook/DeleteBook';
 import Home from './components/Home/Home';
 import './App.css';
 

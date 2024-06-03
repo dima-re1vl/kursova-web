@@ -140,12 +140,20 @@ const EditBook = () => {
               required
             />
           </label>
+          <label>
+            Source Photo:
+            <input
+              type="text"
+              name="srcPhoto"
+              value={bookDetails.srcPhoto}
+              onChange={handleChange}
+            />
+          </label>
           <button type="submit">Save Changes</button>
         </form>
       )}
     </div>
   );
 };
-
 
 export default EditBook;

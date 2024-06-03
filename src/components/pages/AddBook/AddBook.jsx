@@ -9,6 +9,7 @@ const AddBook = () => {
   const [publisher, setPublisher] = useState('');
   const [pages, setPages] = useState('');
   const [year, setYear] = useState('');
+  const [srcPhoto, setSrcPhoto] = useState('');
   const [formIncomplete, setFormIncomplete] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -25,7 +26,8 @@ const AddBook = () => {
         title,
         publisher,
         pages: Number(pages),
-        year: Number(year)
+        year: Number(year),
+        srcPhoto
       };
 
       const docRef = await addDoc(collection(db, 'books'), bookData);
@@ -37,6 +39,7 @@ const AddBook = () => {
       setPublisher('');
       setPages('');
       setYear('');
+      setSrcPhoto('');
       setFormIncomplete(false);
     } catch (error) {
       console.error('Error adding document: ', error);
@@ -90,6 +93,14 @@ const AddBook = () => {
             value={year}
             onChange={(e) => setYear(e.target.value)}
             className={formIncomplete && !year ? styles.incomplete : ''}
+          />
+        </label>
+        <label>
+          Source Photo:
+          <input
+            type="text"
+            value={srcPhoto}
+            onChange={(e) => setSrcPhoto(e.target.value)}
           />
         </label>
         {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}
