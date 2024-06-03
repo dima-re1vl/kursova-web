@@ -2,8 +2,26 @@
     padding: 2rem;
 }
 
-.books {
+.booksList {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.bookItem {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    width: 200px;
+}
+
+.bookItem button {
+    padding: 0.5rem;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.bookItem button:hover {
+    background-color: #ff1a1a;
 }

@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import BookCard from '../../BookCard/BookCard';
 import styles from './DeleteBook.module.css';
 
 const DeleteBook = () => {
   const [books, setBooks] = useState([]);
-  //const [filter, setFilter] = useState({ title: '', author: '', publisher: '', year: '' });
 
-  const fetchBooks = async () => {
-    const querySnapshot = await getDocs(collection(db, 'books'));
-    const booksList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    setBooks(booksList);
-  };
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const querySnapshot = await getDocs(collection(db, 'books'));
+      const booksList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setBooks(booksList);
+    };
 
-  const handleDelete = async (id) => {
+    fetchBooks();
+  }, []);
+
+  const handleDelete = async (bookId) => {
     try {
-      await deleteDoc(doc(db, 'books', id));
-      setBooks(books.filter(book => book.id !== id));
+      await deleteDoc(doc(db, 'books', bookId));
+      setBooks(books.filter(book => book.id !== bookId));
       alert('Book deleted successfully!');
     } catch (e) {
       console.error('Error deleting document: ', e);
@@ -27,10 +29,16 @@ const DeleteBook = () => {
   return (
     <div className={styles.container}>
       <h2>Delete Books</h2>
-      <button onClick={fetchBooks}>Load Books</button>
-      <div className={styles.books}>
+      <div className={styles.booksList}>
         {books.map(book => (
-          <BookCard key={book.id} book={book} onDelete={() => handleDelete(book.id)} />
+          <div key={book.id} className={styles.bookItem}>
+            <h3>{book.title}</h3>
+            <p>Authors: {book.authors.join(', ')}</p>
+            <p>Publisher: {book.publisher}</p>
+            <p>Pages: {book.pages}</p>
+            <p>Year: {book.year}</p>
+            <button onClick={() => handleDelete(book.id)}>Delete</button>
+          </div>
         ))}
       </div>
     </div>

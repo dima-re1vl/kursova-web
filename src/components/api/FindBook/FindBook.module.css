@@ -2,18 +2,29 @@
     padding: 2rem;
 }
 
-.filters {
+.form {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.form label {
     margin-bottom: 1rem;
 }
 
-.filters input {
+.form input {
     padding: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-.books {
+.booksList {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.bookItem {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    width: 200px;
 }

@@ -1,58 +1,92 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import BookCard from '../../BookCard/BookCard';
 import styles from './FindBook.module.css';
 
 const FindBooks = () => {
   const [books, setBooks] = useState([]);
-  const [filter, setFilter] = useState({ title: '', author: '', publisher: '', year: '' });
+  const [searchParams, setSearchParams] = useState({
+    authors: '',
+    title: '',
+    publisher: '',
+    pages: '',
+    year: ''
+  });
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const q = query(collection(db, 'books'), where('title', '==', filter.title));
-      const querySnapshot = await getDocs(q);
-      const booksList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setBooks(booksList);
-    };
+  const handleChange = (e) => {
+    setSearchParams({
+      ...searchParams,
+      [e.target.name]: e.target.value
+    });
+  };
 
-    if (filter.title !== '') {
-      fetchBooks();
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    const booksRef = collection(db, 'books');
+    let q = booksRef;
+
+    if (searchParams.authors !== '') {
+      const authorsArray = searchParams.authors.split(',').map(author => author.trim());
+      q = query(q, where('authors', 'array-contains-any', authorsArray));
     }
-  }, [filter]);
+
+    if (searchParams.title !== '') {
+      q = query(q, where('title', '==', searchParams.title));
+    }
+
+    if (searchParams.publisher !== '') {
+      q = query(q, where('publisher', '==', searchParams.publisher));
+    }
+
+    if (searchParams.pages !== '') {
+      q = query(q, where('pages', '==', Number(searchParams.pages)));
+    }
+
+    if (searchParams.year !== '') {
+      q = query(q, where('year', '==', Number(searchParams.year)));
+    }
+
+    const querySnapshot = await getDocs(q);
+    const booksList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setBooks(booksList);
+  };
 
   return (
     <div className={styles.container}>
       <h2>Find Books</h2>
-      <div className={styles.filters}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={filter.title}
-          onChange={(e) => setFilter({ ...filter, title: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Author"
-          value={filter.author}
-          onChange={(e) => setFilter({ ...filter, author: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Publisher"
-          value={filter.publisher}
-          onChange={(e) => setFilter({ ...filter, publisher: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Year"
-          value={filter.year}
-          onChange={(e) => setFilter({ ...filter, year: e.target.value })}
-        />
-      </div>
-      <div className={styles.books}>
+      <form onSubmit={handleSearch} className={styles.form}>
+        <label>
+          Authors (comma separated):
+          <input type="text" name="authors" value={searchParams.authors} onChange={handleChange} />
+        </label>
+        <label>
+          Title:
+          <input type="text" name="title" value={searchParams.title} onChange={handleChange} />
+        </label>
+        <label>
+          Publisher:
+          <input type="text" name="publisher" value={searchParams.publisher} onChange={handleChange} />
+        </label>
+        <label>
+          Pages:
+          <input type="number" name="pages" value={searchParams.pages} onChange={handleChange} />
+        </label>
+        <label>
+          Year:
+          <input type="number" name="year" value={searchParams.year} onChange={handleChange} />
+        </label>
+        <button type="submit">Search</button>
+      </form>
+      <div className={styles.booksList}>
         {books.map(book => (
-          <BookCard key={book.id} book={book} />
+          <div key={book.id} className={styles.bookItem}>
+            <h3>{book.title}</h3>
+            <p>Authors: {book.authors.join(', ')}</p>
+            <p>Publisher: {book.publisher}</p>
+            <p>Pages: {book.pages}</p>
+            <p>Year: {book.year}</p>
+          </div>
         ))}
       </div>
     </div>
