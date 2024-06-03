@@ -1,0 +1,47 @@
+.container {
+    text-align: center;
+    padding: 2rem;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+    text-align: left;
+}
+
+.card a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}
+
+.description {
+    padding: 1rem;
+}
+
+.description h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.description p {
+    margin: 0.5rem 0 0;
+    color: #666;
+}
