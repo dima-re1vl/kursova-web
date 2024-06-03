@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 import styles from './AddBook.module.css';
 
 const AddBook = () => {
-  const [book, setBook] = useState({
-    authors: '',
-    title: '',
-    publisher: '',
-    pages: '',
-    year: '',
-    srcPhoto: ''
-  });
-
-  const handleChange = (e) => {
-    setBook({
-      ...book,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [authors, setAuthors] = useState('');
+  const [title, setTitle] = useState('');
+  const [publisher, setPublisher] = useState('');
+  const [pages, setPages] = useState('');
+  const [year, setYear] = useState('');
+  const [formIncomplete, setFormIncomplete] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const bookData = {
-      ...book,
-      pages: Number(book.pages),
-      year: Number(book.year),
-      authors: book.authors.split(',').map(author => author.trim())
-    };
 
-    await addDoc(collection(db, 'books'), bookData);
-    setBook({
-      authors: '',
-      title: '',
-      publisher: '',
-      pages: '',
-      year: '',
-      srcPhoto: ''
-    });
+    if (!authors || !title || !publisher || !pages || !year) {
+      setFormIncomplete(true);
+      return;
+    }
+
+    try {
+      const bookData = {
+        authors: authors.split(',').map(author => author.trim()),
+        title,
+        publisher,
+        pages: Number(pages),
+        year: Number(year)
+      };
+
+      const docRef = await addDoc(collection(db, 'books'), bookData);
+      console.log('Book added with ID: ', docRef.id);
+
+      // Clear form fields after successful submission
+      setAuthors('');
+      setTitle('');
+      setPublisher('');
+      setPages('');
+      setYear('');
+      setFormIncomplete(false);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
 
   return (
@@ -46,28 +49,50 @@ const AddBook = () => {
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           Authors (comma separated):
-          <input type="text" name="authors" value={book.authors} onChange={handleChange} />
+          <input
+            type="text"
+            value={authors}
+            onChange={(e) => setAuthors(e.target.value)}
+            className={formIncomplete && !authors ? styles.incomplete : ''}
+          />
         </label>
         <label>
           Title:
-          <input type="text" name="title" value={book.title} onChange={handleChange} />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={formIncomplete && !title ? styles.incomplete : ''}
+          />
         </label>
         <label>
           Publisher:
-          <input type="text" name="publisher" value={book.publisher} onChange={handleChange} />
+          <input
+            type="text"
+            value={publisher}
+            onChange={(e) => setPublisher(e.target.value)}
+            className={formIncomplete && !publisher ? styles.incomplete : ''}
+          />
         </label>
         <label>
           Pages:
-          <input type="number" name="pages" value={book.pages} onChange={handleChange} />
+          <input
+            type="number"
+            value={pages}
+            onChange={(e) => setPages(e.target.value)}
+            className={formIncomplete && !pages ? styles.incomplete : ''}
+          />
         </label>
         <label>
           Year:
-          <input type="number" name="year" value={book.year} onChange={handleChange} />
+          <input
+            type="number"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            className={formIncomplete && !year ? styles.incomplete : ''}
+          />
         </label>
-        <label>
-          Photo URL:
-          <input type="text" name="srcPhoto" value={book.srcPhoto} onChange={handleChange} />
-        </label>
+        {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}
         <button type="submit">Add Book</button>
       </form>
     </div>
