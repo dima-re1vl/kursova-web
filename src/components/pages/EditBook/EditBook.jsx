@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import styles from './EditBook.module.css';
-import { useAuth } from '../../../context/AuthContext'; // Імпорт контексту
+import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import styles from './EditBook.module.css';
 
 const EditBook = () => {
   const [books, setBooks] = useState([]);
@@ -23,9 +23,7 @@ const EditBook = () => {
   useEffect(() => {
     if (!user || user.role !== 'admin') {
       navigate('/');
-      
     }
-    console.log(user);
   }, [user, navigate]);
 
   useEffect(() => {
@@ -103,7 +101,7 @@ const EditBook = () => {
       </div>
       {selectedBookId && (
         <form onSubmit={handleSaveChanges} className={styles.form}>
-          <label>
+          <label className={styles.label}>
             Authors (comma separated):
             <input
               type="text"
@@ -111,9 +109,10 @@ const EditBook = () => {
               value={bookDetails.authors}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Title:
             <input
               type="text"
@@ -121,9 +120,10 @@ const EditBook = () => {
               value={bookDetails.title}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Publisher:
             <input
               type="text"
@@ -131,9 +131,10 @@ const EditBook = () => {
               value={bookDetails.publisher}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Pages:
             <input
               type="number"
@@ -141,9 +142,10 @@ const EditBook = () => {
               value={bookDetails.pages}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Year:
             <input
               type="number"
@@ -151,18 +153,20 @@ const EditBook = () => {
               value={bookDetails.year}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Source Photo:
             <input
               type="text"
               name="srcPhoto"
               value={bookDetails.srcPhoto}
               onChange={handleChange}
+              className={styles.input}
             />
           </label>
-          <button type="submit">Save Changes</button>
+          <button type="submit" className={styles.btn}>Save Changes</button>
         </form>
       )}
     </div>

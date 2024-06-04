@@ -1,12 +1,12 @@
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
 }
 
 .booksList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -14,72 +14,62 @@
     cursor: pointer;
 }
 
-.bookItem.selected {
-    border: 2px solid blue;
+.selected {
+    border: 2px solid #007bff;
 }
 
 .card {
-    border: 1px solid #ccc;
+    display: flex;
+    border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
 }
 
 .cardImage {
-    width: 100%;
-    height: auto;
+    width: 120px;
+    height: 150px;
+    object-fit: cover;
 }
 
 .cardContent {
-    padding: 15px;
+    padding: 10px;
 }
 
 .cardTitle {
-    margin: 0 0 10px;
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 .cardText {
     margin: 5px 0;
 }
 
-
-
-
-.form button:hover {
-    background-color: #45a049;
-}
-
-.bookItem {
-    padding: 0.5rem;
-    cursor: pointer;
-    background-color: white;
-}
-
-.bookItem:hover {
-    background-color: #f0f0f0;
-}
-
-.selected {
-    background-color: #d0e6f7;
-}
-
 .form {
-    display: flex;
-    flex-direction: column;
+    margin-top: 20px;
 }
 
-.form label {
-    margin-bottom: 1rem;
+.label {
+    display: block;
+    margin-bottom: 10px;
 }
 
-.form input {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
+.input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.form button {
-    padding: 0.5rem;
-    background-color: #4CAF50;
-    color: white;
+.btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }

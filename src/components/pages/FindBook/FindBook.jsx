@@ -58,25 +58,25 @@ const FindBooks = () => {
       <form onSubmit={handleSearch} className={styles.form}>
         <label>
           Authors (comma separated):
-          <input type="text" name="authors" value={searchParams.authors} onChange={handleChange} />
+          <input type="text" name="authors" value={searchParams.authors} onChange={handleChange} className={styles.input} />
         </label>
         <label>
           Title:
-          <input type="text" name="title" value={searchParams.title} onChange={handleChange} />
+          <input type="text" name="title" value={searchParams.title} onChange={handleChange} className={styles.input} />
         </label>
         <label>
           Publisher:
-          <input type="text" name="publisher" value={searchParams.publisher} onChange={handleChange} />
+          <input type="text" name="publisher" value={searchParams.publisher} onChange={handleChange} className={styles.input} />
         </label>
         <label>
           Pages:
-          <input type="number" name="pages" value={searchParams.pages} onChange={handleChange} />
+          <input type="number" name="pages" value={searchParams.pages} onChange={handleChange} className={styles.input} />
         </label>
         <label>
           Year:
-          <input type="number" name="year" value={searchParams.year} onChange={handleChange} />
+          <input type="number" name="year" value={searchParams.year} onChange={handleChange} className={styles.input} />
         </label>
-        <button type="submit">Search</button>
+        <button type="submit" className={styles.btn}>Search</button>
       </form>
       <div className={styles.booksList}>
         {books.map(book => (

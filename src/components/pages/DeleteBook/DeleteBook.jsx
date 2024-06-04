@@ -43,12 +43,15 @@ const DeleteBook = () => {
       <div className={styles.booksList}>
         {books.map(book => (
           <div key={book.id} className={styles.bookItem}>
-            <h3>{book.title}</h3>
-            <p>Authors: {book.authors.join(', ')}</p>
-            <p>Publisher: {book.publisher}</p>
-            <p>Pages: {book.pages}</p>
-            <p>Year: {book.year}</p>
-            <button onClick={() => handleDelete(book.id)}>Delete</button>
+            {book.srcPhoto && <img src={book.srcPhoto} alt={book.title} className={styles.bookImage} />}
+            <div className={styles.bookDetails}>
+              <h3>{book.title}</h3>
+              <p>Authors: {book.authors.join(', ')}</p>
+              <p>Publisher: {book.publisher}</p>
+              <p>Pages: {book.pages}</p>
+              <p>Year: {book.year}</p>
+            </div>
+            <button onClick={() => handleDelete(book.id)} className={styles.deleteButton}>Delete</button>
           </div>
         ))}
       </div>

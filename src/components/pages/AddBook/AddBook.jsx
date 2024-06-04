@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import { useAuth } from '../../../context/AuthContext'; // Імпорт контексту
+import { useAuth } from '../../../context/AuthContext'; 
 import { useNavigate } from 'react-router-dom';
 import styles from './AddBook.module.css';
 
@@ -58,60 +58,60 @@ const AddBook = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Add Book</h2>
+      <h2 className={styles.heading}>Add Book</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label>
+        <label className={styles.label}>
           Authors (comma separated):
           <input
             type="text"
             value={authors}
             onChange={(e) => setAuthors(e.target.value)}
-            className={formIncomplete && !authors ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !authors ? styles.incomplete : ''}`}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Title:
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className={formIncomplete && !title ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !title ? styles.incomplete : ''}`}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Publisher:
           <input
             type="text"
             value={publisher}
             onChange={(e) => setPublisher(e.target.value)}
-            className={formIncomplete && !publisher ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !publisher ? styles.incomplete : ''}`}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Pages:
           <input
             type="number"
             value={pages}
             onChange={(e) => setPages(e.target.value)}
-            className={formIncomplete && !pages ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !pages ? styles.incomplete : ''}`}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Year:
           <input
             type="number"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className={formIncomplete && !year ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !year ? styles.incomplete : ''}`}
           />
         </label>
-        <label>
+        <label className={styles.label}>
           Source Photo:
           <input
             type="text"
             value={srcPhoto}
             onChange={(e) => setSrcPhoto(e.target.value)}
-            className={formIncomplete && !srcPhoto ? styles.incomplete : ''}
+            className={`${styles.input} ${formIncomplete && !srcPhoto ? styles.incomplete : ''}`}
           />
         </label>
         {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}
