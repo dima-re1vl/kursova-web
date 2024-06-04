@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 import styles from './EditBook.module.css';
+import { useAuth } from '../../../context/AuthContext'; // Імпорт контексту
+import { useNavigate } from 'react-router-dom';
 
 const EditBook = () => {
   const [books, setBooks] = useState([]);
@@ -14,6 +16,15 @@ const EditBook = () => {
     year: '',
     srcPhoto: ''
   });
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || user.role !== 'admin') {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const fetchBooks = async () => {

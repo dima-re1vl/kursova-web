@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
+import { useAuth } from '../../../context/AuthContext'; // Імпорт контексту
+import { useNavigate } from 'react-router-dom';
 import styles from './AddBook.module.css';
 
 const AddBook = () => {
@@ -11,6 +13,15 @@ const AddBook = () => {
   const [year, setYear] = useState('');
   const [srcPhoto, setSrcPhoto] = useState('');
   const [formIncomplete, setFormIncomplete] = useState(false);
+  
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || user.role !== 'admin') {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +44,6 @@ const AddBook = () => {
       const docRef = await addDoc(collection(db, 'books'), bookData);
       console.log('Book added with ID: ', docRef.id);
 
-      // Clear form fields after successful submission
       setAuthors('');
       setTitle('');
       setPublisher('');
@@ -105,7 +115,7 @@ const AddBook = () => {
           />
         </label>
         {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}
-        <button type="submit">Add Book</button>
+        <button type="submit" className={styles.btn}>Add Book</button>
       </form>
     </div>
   );

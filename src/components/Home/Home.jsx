@@ -5,7 +5,6 @@ import styles from './Home.module.css';
 
 const Home = () => {
   const { user } = useAuth(); // отримання поточного користувача з контексту автентифікації
-  console.log(user)
 
   return (
     <div className={styles.container}>

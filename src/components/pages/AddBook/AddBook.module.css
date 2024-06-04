@@ -25,3 +25,9 @@ input {
 .incomplete {
     border: 1px solid red;
 }
+
+.btn {
+    background-color: black;
+    text-decoration: none !important;
+    color: #fff;
+}
