@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
-        <img src="YOUR_IMAGE_URL_HERE" alt="Logo" />
+        <img src="https://cdn-icons-png.flaticon.com/512/1157/1157109.png" alt="Logo" />
       </Link>
       <h1 className={styles.title}>Shkolenko's Library</h1>
       <div className={styles.auth}>

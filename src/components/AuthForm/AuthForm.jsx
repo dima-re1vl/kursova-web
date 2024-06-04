@@ -8,7 +8,7 @@ import styles from './AuthForm.module.css';
 const AuthForm = ({ type, onClose }) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
-  const { setCurrentUser } = useAuth(); // Використовуйте useAuth тут
+  const { setCurrentUser } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
