@@ -51,4 +51,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export default AuthProvider; // Додали експорт за замовчуванням
+export default AuthProvider;

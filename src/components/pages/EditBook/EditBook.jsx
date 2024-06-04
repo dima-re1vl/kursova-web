@@ -23,7 +23,9 @@ const EditBook = () => {
   useEffect(() => {
     if (!user || user.role !== 'admin') {
       navigate('/');
+      
     }
+    console.log(user);
   }, [user, navigate]);
 
   useEffect(() => {
