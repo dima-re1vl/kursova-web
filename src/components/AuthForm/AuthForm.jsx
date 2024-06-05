@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import { useAuth } from '../../context/AuthContext'; // Зміни тут
+import { useAuth } from '../../context/AuthContext';
 
 import styles from './AuthForm.module.css';
 
