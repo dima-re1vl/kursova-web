@@ -14,11 +14,11 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/find" element={<FindBook />} />
-          <Route path="/edit" element={<EditBook />} />
-          <Route path="/delete" element={<DeleteBook />} />
-          <Route path="/add" element={<AddBook />} />
+          <Route path="https://dima-re1vl.github.io/kursova-web/" element={<Home />} />
+          <Route path="https://dima-re1vl.github.io/kursova-web/find" element={<FindBook />} />
+          <Route path="https://dima-re1vl.github.io/kursova-web/edit" element={<EditBook />} />
+          <Route path="https://dima-re1vl.github.io/kursova-web/delete" element={<DeleteBook />} />
+          <Route path="https://dima-re1vl.github.io/kursova-web/add" element={<AddBook />} />
         </Routes>
       </Router>
     </AuthProvider>
