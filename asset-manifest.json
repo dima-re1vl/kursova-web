@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kursova-web/static/css/main.6331e80a.css",
+    "main.js": "/kursova-web/static/js/main.3d37912b.js",
+    "index.html": "/kursova-web/index.html",
+    "main.6331e80a.css.map": "/kursova-web/static/css/main.6331e80a.css.map",
+    "main.3d37912b.js.map": "/kursova-web/static/js/main.3d37912b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6331e80a.css",
+    "static/js/main.3d37912b.js"
+  ]
+}
