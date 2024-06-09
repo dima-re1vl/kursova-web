@@ -43,7 +43,7 @@ const AuthForm = ({ type, onClose }) => {
           const userDoc = querySnapshot.docs[0];
           setCurrentUser({ id: userDoc.id, ...userDoc.data() });
           onClose();
-          console.log('Login successful!'); // Додаємо повідомлення про успішний вхід у консоль
+          console.log('Login successful!');
         } else {
           setError('Invalid email or password');
         }

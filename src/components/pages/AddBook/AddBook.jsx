@@ -12,6 +12,7 @@ const AddBook = () => {
   const [pages, setPages] = useState('');
   const [year, setYear] = useState('');
   const [srcPhoto, setSrcPhoto] = useState('');
+  const [srcDownload, setSrcDownload] = useState('');
   const [formIncomplete, setFormIncomplete] = useState(false);
   
   const { user } = useAuth();
@@ -26,7 +27,7 @@ const AddBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!authors || !title || !publisher || !pages || !year || !srcPhoto) {
+    if (!authors || !title || !publisher || !pages || !year || !srcPhoto || !srcDownload) {
       setFormIncomplete(true);
       return;
     }
@@ -38,7 +39,8 @@ const AddBook = () => {
         publisher,
         pages: Number(pages),
         year: Number(year),
-        srcPhoto
+        srcPhoto,
+        srcDownload // Додавання srcDownload до об'єкта bookData
       };
 
       const docRef = await addDoc(collection(db, 'books'), bookData);
@@ -50,6 +52,7 @@ const AddBook = () => {
       setPages('');
       setYear('');
       setSrcPhoto('');
+      setSrcDownload('');
       setFormIncomplete(false);
     } catch (error) {
       console.error('Error adding document: ', error);
@@ -112,6 +115,15 @@ const AddBook = () => {
             value={srcPhoto}
             onChange={(e) => setSrcPhoto(e.target.value)}
             className={`${styles.input} ${formIncomplete && !srcPhoto ? styles.incomplete : ''}`}
+          />
+        </label>
+        <label className={styles.label}>
+          Source Download:
+          <input
+            type="text"
+            value={srcDownload}
+            onChange={(e) => setSrcDownload(e.target.value)}
+            className={`${styles.input} ${formIncomplete && !srcDownload ? styles.incomplete : ''}`}
           />
         </label>
         {formIncomplete && <p className={styles.errorMessage}>Please fill out all fields.</p>}

@@ -56,23 +56,23 @@ const FindBooks = () => {
     <div className={styles.container}>
       <h2>Find Books</h2>
       <form onSubmit={handleSearch} className={styles.form}>
-        <label>
+        <label className={styles.label}>
           Authors (comma separated):
           <input type="text" name="authors" value={searchParams.authors} onChange={handleChange} className={styles.input} />
         </label>
-        <label>
+        <label className={styles.label}>
           Title:
           <input type="text" name="title" value={searchParams.title} onChange={handleChange} className={styles.input} />
         </label>
-        <label>
+        <label className={styles.label}>
           Publisher:
           <input type="text" name="publisher" value={searchParams.publisher} onChange={handleChange} className={styles.input} />
         </label>
-        <label>
+        <label className={styles.label}>
           Pages:
           <input type="number" name="pages" value={searchParams.pages} onChange={handleChange} className={styles.input} />
         </label>
-        <label>
+        <label className={styles.label}>
           Year:
           <input type="number" name="year" value={searchParams.year} onChange={handleChange} className={styles.input} />
         </label>
@@ -87,6 +87,7 @@ const FindBooks = () => {
             <p>Publisher: {book.publisher}</p>
             <p>Pages: {book.pages}</p>
             <p>Year: {book.year}</p>
+            <a href={book.srcDownload} className={styles.downloadBtn} target="_blank" rel="noopener noreferrer">Download</a>
           </div>
         ))}
       </div>

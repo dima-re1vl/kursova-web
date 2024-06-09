@@ -14,7 +14,8 @@ const EditBook = () => {
     publisher: '',
     pages: '',
     year: '',
-    srcPhoto: ''
+    srcPhoto: '',
+    srcDownload: '' // Додавання srcDownload до деталей книги
   });
 
   const { user } = useAuth();
@@ -45,7 +46,8 @@ const EditBook = () => {
       publisher: book.publisher,
       pages: book.pages,
       year: book.year,
-      srcPhoto: book.srcPhoto || ''
+      srcPhoto: book.srcPhoto || '',
+      srcDownload: book.srcDownload || '' // Додавання srcDownload до деталей книги
     });
   };
 
@@ -64,7 +66,8 @@ const EditBook = () => {
       publisher: bookDetails.publisher,
       pages: Number(bookDetails.pages),
       year: Number(bookDetails.year),
-      srcPhoto: bookDetails.srcPhoto
+      srcPhoto: bookDetails.srcPhoto,
+      srcDownload: bookDetails.srcDownload // Додавання srcDownload до об'єкта updatedBook
     };
 
     try {
@@ -94,6 +97,7 @@ const EditBook = () => {
                 <p className={styles.cardText}>Publisher: {book.publisher}</p>
                 <p className={styles.cardText}>Pages: {book.pages}</p>
                 <p className={styles.cardText}>Year: {book.year}</p>
+                <a href={book.srcDownload} className={styles.downloadBtn} target="_blank" rel="noopener noreferrer">Download</a>
               </div>
             </div>
           </div>
@@ -162,6 +166,16 @@ const EditBook = () => {
               type="text"
               name="srcPhoto"
               value={bookDetails.srcPhoto}
+              onChange={handleChange}
+              className={styles.input}
+            />
+          </label>
+          <label className={styles.label}>
+            Source Download:
+            <input
+              type="text"
+              name="srcDownload"
+              value={bookDetails.srcDownload}
               onChange={handleChange}
               className={styles.input}
             />
